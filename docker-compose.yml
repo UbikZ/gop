@@ -1,0 +1,4 @@
+gop-server:
+  build: .
+  volumes:
+    - /srv/docker/gop:/var/log/gop

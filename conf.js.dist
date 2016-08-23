@@ -1,0 +1,12 @@
+module.exports = {
+  username: 'USER',
+  password: 'PASSWORD',
+  provider: 'PROVIDER',
+  location: {
+    type: 'coords',
+    "coords": {
+      latitude: 0,
+      longitude: 0,
+    },
+  },
+};

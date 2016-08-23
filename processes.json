@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "name": "gop",
+      "out_file": "/var/log/gop/out.log",
+      "error_file": "/var/log/gop/err.log",
+      "log_date_format": "MM/DD/YYYY HH:mm:ss",
+      "script": "server.js"
+    }
+  ]
+}

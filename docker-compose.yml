@@ -1,14 +1,16 @@
 nginx:
-  build: ./nginx
+  image: ubikz/gop-nginx
   links:
-    - gop-server:gop-server
+      - gop-server:gop-server
   ports:
       - "80:80"
       - "443:443"
   volumes:
-      - /srv/docker/nginx/log:/var/log/nginx
+      - /srv/docker/gop:/var/log/nginx
   env_file: nginx/.env.conf
 gop-server:
-  build: ./gop-server
+  image: ubikz/gop-server
+  ports:
+      - "3000"
   volumes:
-    - /srv/docker/gop:/var/log/gop
+      - /srv/docker/gop:/var/log/gop

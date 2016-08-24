@@ -1,5 +1,5 @@
 # Set nginx base image (based on alpine)
-FROM nginx:alpine
+FROM nginx
 
 # File Author / Maintainer
 MAINTAINER Gabriel Malet

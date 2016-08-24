@@ -11,9 +11,9 @@ RUN npm install -g pm2
 WORKDIR /src
 
 # Translation (fr)
-COPY p.json /src/pokemons.json
+COPY p.json /src/gop-server/pokemons.json
 
 EXPOSE 3000
 
 # Run app
-CMD pm2 start --no-daemon processes.dev.json
+CMD pm2 start --no-daemon /src/gop-server/processes.dev.json

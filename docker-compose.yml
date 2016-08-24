@@ -7,7 +7,7 @@ nginx:
       - "443:443"
   volumes:
       - /srv/docker/gop:/var/log/nginx
-      - /etc/letsencrypt/live/:/etc/nginx/ssl
+      - /etc/letsencrypt/live:/etc/nginx/ssl:ro
   env_file: nginx/.env.conf
 gop-server:
   image: ubikz/gop-server

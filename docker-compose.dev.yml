@@ -11,6 +11,7 @@ nginx:
   env_file: nginx/.env.conf
 gop-server:
   build: ./gop-server
+  dockerfile: Dockerfile.dev
   ports:
       - "3000"
   volumes:

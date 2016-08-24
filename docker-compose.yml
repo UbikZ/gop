@@ -3,10 +3,10 @@ nginx:
   links:
       - gop-server:gop-server
   ports:
-      - "80:80"
       - "443:443"
   volumes:
       - /srv/docker/gop:/var/log/nginx
+      - ./nginx/ssl:/etc/nginx
   env_file: nginx/.env.conf
 gop-server:
   image: ubikz/gop-server
@@ -14,3 +14,4 @@ gop-server:
       - "3000"
   volumes:
       - /srv/docker/gop:/var/log/gop
+      - ./gop-server/conf.js:/src/conf.js:ro

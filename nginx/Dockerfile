@@ -11,7 +11,7 @@ COPY sites-enabled/bot-skype.conf /etc/nginx/sites-enabled/bot-skype.conf
 COPY ./scripts/entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-# Expose ports (SSL)
+# 443 Expose ports (SSL)
 EXPOSE 443
 
 # Define default command

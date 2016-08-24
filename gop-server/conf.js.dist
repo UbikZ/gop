@@ -1,0 +1,18 @@
+module.exports = {
+  pog: {
+    username: '',
+    password: '',
+    provider: '',
+    location: {
+      type: 'coords',
+      "coords": {
+        latitude: 0,
+        longitude: 0,
+      },
+    },
+  },
+  skype: {
+    clientId: '',
+    clientSecret: '',
+  },
+};

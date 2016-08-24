@@ -6,7 +6,9 @@
     "url": "git+https://github.com/ubikz/gop.git"
   },
   "dependencies": {
-    "pokemon-go-node-api": "^1.3.5"
+    "botbuilder": "^3.2.3",
+    "pokemon-go-node-api": "^1.3.5",
+    "restify": "^4.1.1"
   },
   "license": "MIT"
 }

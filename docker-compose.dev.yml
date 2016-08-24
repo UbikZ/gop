@@ -1,0 +1,18 @@
+nginx:
+  build: ./nginx
+  links:
+      - gop-server:gop-server
+  ports:
+      - "80:80"
+      - "443:443"
+  volumes:
+      - /srv/docker/gop:/var/log/nginx
+      - /srv/docker/ssl:/etc/nginx/ssl
+  env_file: nginx/.env.conf
+gop-server:
+  build: ./gop-server
+  ports:
+      - "3000"
+  volumes:
+      - /srv/docker/gop:/var/log/gop
+      - .:/src

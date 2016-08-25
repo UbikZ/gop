@@ -21,5 +21,8 @@ COPY p.json /src/pokemons.json
 
 EXPOSE 3000
 
+COPY ./scripts/entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
 # Run app
 CMD pm2 start --no-daemon processes.json

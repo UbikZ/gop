@@ -1,18 +1,9 @@
-nginx:
-  image: ubikz/gop-nginx
-  links:
-      - gop-server:gop-server
-  ports:
-      - "80:80"
-      - "443:443"
-  volumes:
-      - /srv/docker/gop:/var/log/nginx
-      - /srv/docker/ssl:/etc/nginx/ssl
-  env_file: nginx/.env.conf
 gop-server:
   image: ubikz/gop-server
   ports:
-      - "3000"
+      - "3000:3000"
   volumes:
       - /srv/docker/gop:/var/log/gop
-      - ./gop-server/conf.js:/src/conf.js:ro
+      - /etc/nginx/sites-enabled/bot-skype.conf:/src/nginx/sites-enabled/bot-skype.conf:ro
+      - gop-server/conf.js:/src/conf.js:ro
+  env_file: nginx/.env.conf

@@ -21,9 +21,6 @@ const connector = new builder.ChatConnector({
   appPassword: conf.skype.client_secret,
 });
 
-const bot = new builder.UniversalBot(connector);
-server.post('/api/messages', connector.listen());
-
 var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
 
@@ -33,10 +30,13 @@ server.post('/api/messages', connector.listen());
 //=========================================================
 
 bot.on('conversationUpdate', function (message) {
+  console.log('Conversation UPDATEd');
   // Check for group conversations
   if (message.address.conversation.isGroup) {
+    console.log('Conversation is GROUP');
     // Send a hello message when bot is added
     if (message.membersAdded) {
+      console.log('BOT added to a conversation');
       message.membersAdded.forEach(function (identity) {
         if (identity.id === message.address.bot.id) {
           var reply = new builder.Message()
@@ -49,6 +49,7 @@ bot.on('conversationUpdate', function (message) {
 
     // Send a goodbye message when bot is removed
     if (message.membersRemoved) {
+      console.log('BOT removed to a conversation');
       message.membersRemoved.forEach(function (identity) {
         if (identity.id === message.address.bot.id) {
           var reply = new builder.Message()
@@ -63,6 +64,7 @@ bot.on('conversationUpdate', function (message) {
 
 bot.on('contactRelationUpdate', function (message) {
   if (message.action === 'add') {
+    console.log('Bot added to a person');
     var name = message.user ? message.user.name : null;
     var reply = new builder.Message()
       .address(message.address)
@@ -98,6 +100,7 @@ bot.beginDialogAction('help', '/help', { matches: /^help/i });
 
 bot.dialog('/', [
   function (session) {
+    console.log('Test command /');
     // Send a greeting and show help.
     var card = new builder.HeroCard(session)
       .title("Microsoft Bot Framework")
@@ -122,6 +125,8 @@ bot.dialog('/', [
 
 bot.dialog('/menu', [
   function (session) {
+    console.log('Test command /menu');
+
     builder.Prompts.choice(session, "What demo would you like to run?", "prompts|picture|cards|list|carousel|receipt|actions|(quit)");
   },
   function (session, results) {
@@ -141,6 +146,8 @@ bot.dialog('/menu', [
 
 bot.dialog('/help', [
   function (session) {
+    console.log('Test command /help');
+
     session.endDialog("Global commands that are available anytime:\n\n* menu - Exits a demo and returns to the menu.\n* goodbye - End this conversation.\n* help - Displays these commands.");
   }
 ]);

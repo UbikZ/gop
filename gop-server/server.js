@@ -147,7 +147,7 @@ bot.dialog('/menu', [
 bot.dialog('/help', [
   function (session) {
     console.log('Test command /help');
-
+    bot.send('test');
     session.endDialog("Global commands that are available anytime:\n\n* menu - Exits a demo and returns to the menu.\n* goodbye - End this conversation.\n* help - Displays these commands.");
   }
 ]);

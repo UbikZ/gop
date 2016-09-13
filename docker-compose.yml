@@ -1,5 +1,5 @@
 gop-server:
-  build: ubikz/gop-server
+  image: ubikz/gop-server
   ports:
       - "3000:3000"
   volumes:

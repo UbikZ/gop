@@ -60,7 +60,8 @@ inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.prov
                 if (dat['WildPokemon']) {
                   const expTimestamp = new Date().getTime() + dat['WildPokemon'].TimeTillHiddenMs;
                   const date = new Date(expTimestamp);
-                  const formatDateExpiration = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()})`;
+                  date.setUTCHours(-1)
+                  const formatDateExpiration = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
                   const encounterHash = crypto
                     .createHash('sha1')
                     .update(JSON.stringify(dat['WildPokemon'].EncounterId))

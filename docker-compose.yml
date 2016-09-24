@@ -1,9 +1,5 @@
 gop-server:
   image: ubikz/gop-server
-  ports:
-      - "3000:3000"
   volumes:
       - /srv/docker/gop:/var/log/gop
-      - /etc/nginx/sites-dockered/gop:/nginx/sites-enabled
       - ./conf.js:/src/conf.js:ro
-  env_file: nginx/.env.conf

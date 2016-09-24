@@ -1,5 +1,5 @@
 # Set the base image to Ubuntu
-FROM node:slim
+FROM node
 
 # File Author / Maintainer
 MAINTAINER Gabriel Malet
@@ -18,11 +18,6 @@ ADD . /src
 
 # Translation (fr)
 COPY p.json /src/pokemons.json
-
-EXPOSE 3000
-
-COPY scripts/entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
 
 # Run app
 CMD pm2 start --no-daemon processes.json

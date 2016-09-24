@@ -1,5 +1,5 @@
-gop-server:
-  image: ubikz/gop-server
+gop:
+  image: ubikz/gop
   volumes:
       - /srv/docker/gop:/var/log/gop
       - ./conf.js:/src/conf.js:ro

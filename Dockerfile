@@ -1,5 +1,5 @@
 # Set the base image to Ubuntu
-FROM node
+FROM node:slim
 
 # File Author / Maintainer
 MAINTAINER Gabriel Malet

@@ -23,7 +23,7 @@ inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.prov
     throw err;
   }
 
-  const message = `${prefix} BOT Pokemon enabled : ${inst.playerInfo.locationName}*`;
+  const message = `${prefix} BOT Pokemon enabled : ${inst.playerInfo.locationName}`;
   sendMessage(message);
 
   inst.GetProfile(function (err, profile) {
@@ -65,7 +65,7 @@ inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.prov
                   .update(JSON.stringify(dat['WildPokemon'].EncounterId))
                   .digest('hex');
                 if (existsInCache(encounterHash, expTimestamp)) {
-                  sendMessage(`${prefix} Pokemon '${pokedexInfo.name}' appears (hidden at ${formatDateExpiration}`);
+                  sendMessage(`${prefix} Pokemon '${pokedexInfo.name}' appears (hidden at ${formatDateExpiration})`);
                 }
               });
             })(currentPokemon);

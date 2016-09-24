@@ -57,7 +57,7 @@ inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.prov
               var pokedexInfo = inst.pokemonlist[parseInt(currentPokemon.PokedexTypeId) - 1];
 
               inst.EncounterPokemon(currentPokemon, function (suc, dat) {
-                if (dat['WildPokemon']) {
+                if (dat) {
                   const expTimestamp = new Date().getTime() + dat['WildPokemon'].TimeTillHiddenMs;
                   const date = new Date(expTimestamp);
                   date.setUTCHours(-1)

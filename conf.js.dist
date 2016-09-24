@@ -1,18 +1,22 @@
 module.exports = {
   pog: {
-    username: '',
-    password: '',
-    provider: '',
+    username: 'xxx',
+    password: 'xxx',
+    provider: 'ptc',
     location: {
       type: 'coords',
       "coords": {
-        latitude: 0,
-        longitude: 0,
+        latitude: 0.000000,
+        longitude: 0.000000,
       },
     },
   },
   skype: {
-    clientId: '',
-    clientSecret: '',
+    clientId: 'xxx',
+    clientSecret: 'xxx',
+    authUri : 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+    confUri: 'https://apis.skype.com/v2/conversations/xxx/activities',
+    grantType: 'client_credentials',
+    scope: 'https://graph.microsoft.com/.default',
   },
 };

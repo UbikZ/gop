@@ -5,5 +5,5 @@ gop-server:
   volumes:
       - /srv/docker/gop:/var/log/gop
       - /etc/nginx/sites-dockered/gop:/nginx/sites-enabled
-      - ./gop-server/conf.js:/src/conf.js:ro
+      - ./conf.js:/src/conf.js:ro
   env_file: nginx/.env.conf

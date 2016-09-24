@@ -17,7 +17,7 @@ WORKDIR /src
 ADD . /src
 
 # Translation (fr)
-COPY p.json /src/pokemons.json
+COPY p.json /src/node_modules/pokemon-go-node-api/pokemons.json
 
 # Run app
 CMD pm2 start --no-daemon processes.json

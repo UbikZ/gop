@@ -57,15 +57,19 @@ inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.prov
               var pokedexInfo = inst.pokemonlist[parseInt(currentPokemon.PokedexTypeId) - 1];
 
               inst.EncounterPokemon(currentPokemon, function (suc, dat) {
-                const expTimestamp = new Date().getTime() + dat['WildPokemon'].TimeTillHiddenMs;
-                const date = new Date(expTimestamp);
-                const formatDateExpiration = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()})`;
-                const encounterHash = crypto
-                  .createHash('sha1')
-                  .update(JSON.stringify(dat['WildPokemon'].EncounterId))
-                  .digest('hex');
-                if (existsInCache(encounterHash, expTimestamp)) {
-                  sendMessage(`${prefix} Pokemon '${pokedexInfo.name}' appears (hidden at ${formatDateExpiration})`);
+                if (dat['WildPokemon']) {
+                  const expTimestamp = new Date().getTime() + dat['WildPokemon'].TimeTillHiddenMs;
+                  const date = new Date(expTimestamp);
+                  const formatDateExpiration = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()})`;
+                  const encounterHash = crypto
+                    .createHash('sha1')
+                    .update(JSON.stringify(dat['WildPokemon'].EncounterId))
+                    .digest('hex');
+                  if (existsInCache(encounterHash, expTimestamp)) {
+                    sendMessage(`${prefix} Pokemon '${pokedexInfo.name}' appears (hidden at ${formatDateExpiration})`);
+                  }
+                } else {
+                  console.log('Error : ', dat);
                 }
               });
             })(currentPokemon);

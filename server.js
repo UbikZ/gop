@@ -59,8 +59,7 @@ inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.prov
               inst.EncounterPokemon(currentPokemon, function (suc, dat) {
                 if (dat) {
                   const expTimestamp = new Date().getTime() + dat['WildPokemon'].TimeTillHiddenMs;
-                  const date = new Date(expTimestamp);
-                  date.setUTCHours(-1)
+                  const date = new Date(expTimestamp + (2 * 3600 * 1000));
                   const formatDateExpiration = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
                   const encounterHash = crypto
                     .createHash('sha1')

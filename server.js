@@ -7,7 +7,6 @@ const Pog = require('pokemon-go-node-api');
 const inst = new Pog.Pokeio();
 
 const conf = require('./conf');
-const prefix = '[pokebot:~] ±';
 
 let token = {
   type: undefined,
@@ -18,13 +17,13 @@ let token = {
 const pokemonCache = {};
 
 inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.provider, function (err) {
+  const loc = conf.pog.location;
+  const prefix = `[pokebot:~(${loc.coords.latitude}, ${loc.coords.longitude})] ±`;
+
   if (err) {
     sendMessage(`ERROR : ${err.message}`);
     throw err;
   }
-
-  const message = `${prefix} BOT Pokemon enabled : ${inst.playerInfo.locationName}`;
-  sendMessage(message);
 
   inst.GetProfile(function (err, profile) {
     if (err) {

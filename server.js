@@ -21,13 +21,13 @@ inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.prov
   const prefix = `[pokebot:~(${loc.coords.latitude}, ${loc.coords.longitude})] ±`;
 
   if (err) {
-    sendMessage(`ERROR : ${err.message}`);
+    console.log(err);
     throw err;
   }
 
   inst.GetProfile(function (err, profile) {
     if (err) {
-      sendMessage(`ERROR : ${err.message}`);
+      console.log(err);
       throw err;
     }
 
@@ -39,6 +39,7 @@ inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.prov
       inst.Heartbeat(function (err, hb) {
         if (err) {
           console.log(err);
+          throw err;
         }
 
         if (hb && Array.isArray(hb.cells)) {

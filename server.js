@@ -42,37 +42,39 @@ inst.init(conf.pog.username, conf.pog.password, conf.pog.location, conf.pog.prov
           console.log(err);
         }
 
-        for (var i = hb.cells.length - 1; i >= 0; i--) {
-          if (hb.cells[i].NearbyPokemon[0]) {
-            var pokemon = inst.pokemonlist[parseInt(hb.cells[i].NearbyPokemon[0].PokedexNumber) - 1];
-            console.log('[+] There is a ' + pokemon.name + ' near.');
+        if (hb && Array.isArray(hb.cells)) {
+          for (var i = hb.cells.length - 1; i >= 0; i--) {
+            if (hb.cells[i].NearbyPokemon[0]) {
+              var pokemon = inst.pokemonlist[parseInt(hb.cells[i].NearbyPokemon[0].PokedexNumber) - 1];
+              console.log('[+] There is a ' + pokemon.name + ' near.');
+            }
           }
-        }
 
-        for (i = hb.cells.length - 1; i >= 0; i--) {
-          for (var j = hb.cells[i].MapPokemon.length - 1; j >= 0; j--) {
-            var currentPokemon = hb.cells[i].MapPokemon[j];
+          for (i = hb.cells.length - 1; i >= 0; i--) {
+            for (var j = hb.cells[i].MapPokemon.length - 1; j >= 0; j--) {
+              var currentPokemon = hb.cells[i].MapPokemon[j];
 
-            (function (currentPokemon) {
-              var pokedexInfo = inst.pokemonlist[parseInt(currentPokemon.PokedexTypeId) - 1];
+              (function (currentPokemon) {
+                var pokedexInfo = inst.pokemonlist[parseInt(currentPokemon.PokedexTypeId) - 1];
 
-              inst.EncounterPokemon(currentPokemon, function (suc, dat) {
-                if (dat) {
-                  const expTimestamp = new Date().getTime() + dat['WildPokemon'].TimeTillHiddenMs;
-                  const date = new Date(expTimestamp + (2 * 3600 * 1000));
-                  const formatDateExpiration = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-                  const encounterHash = crypto
-                    .createHash('sha1')
-                    .update(JSON.stringify(dat['WildPokemon'].EncounterId))
-                    .digest('hex');
-                  if (existsInCache(encounterHash, expTimestamp)) {
-                    sendMessage(`${prefix} Pokemon '${pokedexInfo.name}' appears (hidden at ${formatDateExpiration})`);
+                inst.EncounterPokemon(currentPokemon, function (suc, dat) {
+                  if (dat) {
+                    const expTimestamp = new Date().getTime() + dat['WildPokemon'].TimeTillHiddenMs;
+                    const date = new Date(expTimestamp + (2 * 3600 * 1000));
+                    const formatDateExpiration = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+                    const encounterHash = crypto
+                      .createHash('sha1')
+                      .update(JSON.stringify(dat['WildPokemon'].EncounterId))
+                      .digest('hex');
+                    if (existsInCache(encounterHash, expTimestamp)) {
+                      sendMessage(`${prefix} Pokemon '${pokedexInfo.name}' appears (hidden at ${formatDateExpiration})`);
+                    }
+                  } else {
+                    console.log('Error : ', dat);
                   }
-                } else {
-                  console.log('Error : ', dat);
-                }
-              });
-            })(currentPokemon);
+                });
+              })(currentPokemon);
+            }
           }
         }
       });
